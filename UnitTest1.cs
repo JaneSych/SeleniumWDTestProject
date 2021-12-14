@@ -56,7 +56,7 @@ namespace SeleniumWDTestProject
             driver.FindElement(By.XPath("//input[@type='submit']")).Click();
 
             Assert.AreEqual(driver.Url, "http://localhost:5000/Product");
-            Assert.IsTrue(isElementPresent(By.LinkText("Monster Energy")));
+            Assert.IsTrue(isElementPresent(By.LinkText(Name)));
         }
 
         [Test]
