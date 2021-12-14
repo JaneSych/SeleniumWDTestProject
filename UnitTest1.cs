@@ -14,7 +14,7 @@ namespace SeleniumWDTestProject
 
         public static bool isElementPresent(By locator)
         {
-            Thread.Sleep(10);
+            Thread.Sleep(100);
             return driver.FindElements(locator).Count != 0;
         }
 
@@ -97,9 +97,10 @@ namespace SeleniumWDTestProject
         {
             driver.Navigate().GoToUrl("http://localhost:5000/Product");
             Assert.IsTrue(isElementPresent(By.LinkText(Name)));
+
             driver.FindElement(By.XPath(string.Format("//td[a[contains(text(),'{0}')]]/following-sibling::td[a[contains(text(),'Remove')]]/a", Name))).Click();
             driver.SwitchTo().Alert().Accept();
-            System.Console.WriteLine(isElementPresent(By.LinkText(Name)));
+
             Assert.IsFalse(isElementPresent(By.LinkText(Name)));
         }
 
