@@ -22,9 +22,6 @@ namespace SeleniumWDTestProject.page_objects
             PageFactory.InitElements(driver, this);
         }
 
-        string login = "user";
-        string password = "user";
-
         [FindsBy(How = How.Id, Using = "Name")]
         private IWebElement loginInput;
 
@@ -34,7 +31,7 @@ namespace SeleniumWDTestProject.page_objects
         [FindsBy(How = How.XPath, Using = "//input[@type='submit']")]
         private IWebElement submitBtn;
 
-        public MainPage logIn()
+        public MainPage logIn(string login, string password)
         {
             loginInput.SendKeys(login);
             passwordInput.SendKeys(password);

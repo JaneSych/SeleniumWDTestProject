@@ -33,7 +33,7 @@ namespace SeleniumWDTestProject
             driver.Navigate().GoToUrl("http://localhost:5000/Account/Login");
 
             LogInPage loginPage = new LogInPage(driver);
-            MainPage mainPage = loginPage.logIn();
+            MainPage mainPage = loginPage.logIn("user", "user");
 
             Assert.AreEqual(driver.FindElement(By.TagName("h2")).Text, "Home page");
         }
