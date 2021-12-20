@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using OpenQA.Selenium.Interactions;
 
-namespace SeleniumWDTestProject.page_objects
+namespace SeleniumWDTestProject
 {
     class MainPage : AbstractPage
     {

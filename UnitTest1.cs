@@ -11,7 +11,6 @@ using SeleniumExtras.WaitHelpers;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using OpenQA.Selenium.Interactions;
-using SeleniumWDTestProject.page_objects;
 
 namespace SeleniumWDTestProject
 {
@@ -44,11 +43,14 @@ namespace SeleniumWDTestProject
         [TestCase("Fitnes Shok", "Confections", "Specialty Biscuits, Ltd.", "89.0000", "1", "700", "1", false)]
         public void T1_CreateProduct(string Name, string Category, string Supplier, string UnitPrice, string Quantity, string UnitsInStock, string UnitsOnOrder, bool Discontinued)
         {
+            ProductObj product = new ProductObj(Name, Category, Supplier, UnitPrice, Quantity, UnitsInStock, UnitsOnOrder, Discontinued);
+
             MainPage mainPage = new MainPage(driver);
             ProductsListPage productsListPage = mainPage.goToProductsListPage();
-            ProductPage productPage = productsListPage.createNewProduct();
-            productPage.createProduct(Name, Category, Supplier, UnitPrice, Quantity, UnitsInStock, UnitsOnOrder, Discontinued);
-  
+            ProductBL productPage = productsListPage.createNewProduct();
+            productPage.CreateNewProduct(product);
+
+
             Assert.AreEqual(driver.Url, "http://localhost:5000/Product");
             Assert.IsTrue(isElementPresent(By.LinkText(Name)));
         }

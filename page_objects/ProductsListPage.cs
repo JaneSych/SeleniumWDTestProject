@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using OpenQA.Selenium.Interactions;
 
-namespace SeleniumWDTestProject.page_objects
+namespace SeleniumWDTestProject
 {
     class ProductsListPage : AbstractPage
     {
@@ -26,11 +26,11 @@ namespace SeleniumWDTestProject.page_objects
         [FindsBy(How = How.LinkText, Using = "Create new")]
         private IWebElement createBtn;
 
-        public ProductPage createNewProduct()
+        public ProductBL createNewProduct()
         {
             createBtn.Click();
 
-            return new ProductPage(driver);
+            return new ProductBL(driver);
         }
 
         public ProductPage goToProductPage(string name)
