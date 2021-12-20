@@ -115,5 +115,6 @@ namespace SeleniumWDTestProject
         {
             return driver.FindElements(By.XPath("//input[@id='Discontinued' and @checked = 'checked']")).Count != 0;
         }
+ 
     }
 }

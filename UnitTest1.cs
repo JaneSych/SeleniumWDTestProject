@@ -48,8 +48,7 @@ namespace SeleniumWDTestProject
             MainPage mainPage = new MainPage(driver);
             ProductsListPage productsListPage = mainPage.goToProductsListPage();
             ProductBL productPage = productsListPage.createNewProduct();
-            productPage.CreateNewProduct(product);
-
+            productPage.createNewProduct(product);
 
             Assert.AreEqual(driver.Url, "http://localhost:5000/Product");
             Assert.IsTrue(isElementPresent(By.LinkText(Name)));
@@ -61,20 +60,15 @@ namespace SeleniumWDTestProject
         [TestCase("Fitnes Shok", "Confections", "Specialty Biscuits, Ltd.", "89.0000", "1", "700", "1", false)]
         public void T2_ValuesChecking(string Name, string Category, string Supplier, string UnitPrice, string Quantity, string UnitsInStock, string UnitsOnOrder, bool Discontinued)
         {
+            ProductObj product = new ProductObj(Name, Category, Supplier, UnitPrice, Quantity, UnitsInStock, UnitsOnOrder, Discontinued);
+
             MainPage mainPage = new MainPage(driver);
             ProductsListPage productsListPage = mainPage.goToProductsListPage();
 
             Assert.IsTrue(isElementPresent(By.LinkText(Name)));
-            ProductPage productPage = productsListPage.goToProductPage(Name);
+            ProductBL productPage = productsListPage.goToProductPage(Name);
 
-            Assert.AreEqual(Name, productPage.getProductName());
-            Assert.AreEqual(Category, productPage.getProductCategory());
-            Assert.AreEqual(Supplier, productPage.getProductSupplier());
-            Assert.AreEqual(UnitPrice, productPage.getProductPrice());
-            Assert.AreEqual(Quantity, productPage.getProductQuantity());
-            Assert.AreEqual(UnitsInStock, productPage.getProductInStock());
-            Assert.AreEqual(UnitsOnOrder, productPage.getProductOnOrder());
-            Assert.AreEqual(Discontinued, productPage.getProductDiscontinuedState());
+            Assert.IsTrue(productPage.productCheck(product));
         }
 
         [Test]

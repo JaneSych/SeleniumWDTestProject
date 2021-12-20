@@ -33,12 +33,12 @@ namespace SeleniumWDTestProject
             return new ProductBL(driver);
         }
 
-        public ProductPage goToProductPage(string name)
+        public ProductBL goToProductPage(string name)
         {
             IWebElement product = driver.FindElement(By.LinkText(name)); 
             product.Click();
 
-            return new ProductPage(driver);
+            return new ProductBL(driver);
         }
 
         public void deleteProduct(string name)

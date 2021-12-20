@@ -22,18 +22,26 @@ namespace SeleniumWDTestProject
             PageFactory.InitElements(driver, this);
         }
 
-        public void CreateNewProduct(ProductObj product)
+        public void createNewProduct(ProductObj product)
         {
-            ProductPage createNewProductPage = new ProductPage(driver);
-            createNewProductPage.createProduct(
-                product.getProductName(),
-                product.getProductCategory(), 
-                product.getProductSupplier(), 
-                product.getProductPrice(),
-                product.getProductQuantity(),
-                product.getProductInStock(),
-                product.getProductOnOrder(),
-                product.getProductDiscontinuedState());
+            ProductPage createProductPage = new ProductPage(driver);
+            createProductPage.createProduct(product.productName, product.productCategory, product.productSupplier, product.productPrice, 
+                product.productQuantity, product.productInStock, product.productOnOrder,  product.productDiscontinued);
         }
+
+        public bool productCheck(ProductObj product)
+        {
+            ProductPage productPage = new ProductPage(driver);
+
+            return ((product.productName == productPage.getProductName())
+            || (product.productCategory == productPage.getProductCategory())
+            || (product.productSupplier == productPage.getProductSupplier())
+            || (product.productPrice == productPage.getProductPrice())
+            || (product.productQuantity == productPage.getProductQuantity())
+            || (product.productInStock == productPage.getProductInStock())
+            || (product.productOnOrder == productPage.getProductOnOrder())
+            || (product.productDiscontinued == productPage.getProductDiscontinuedState()));
+        }
+
     }
 }
