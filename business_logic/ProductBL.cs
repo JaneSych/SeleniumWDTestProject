@@ -24,14 +24,22 @@ namespace SeleniumWDTestProject
 
         public void createNewProduct(ProductObj product)
         {
-            ProductPage createProductPage = new ProductPage(driver);
+            MainPage mainPage = new MainPage(driver);
+            ProductsListPage productsListPage = mainPage.goToProductsListPage();
+            ProductPage createProductPage = productsListPage.createNewProduct();
+
             createProductPage.createProduct(product.productName, product.productCategory, product.productSupplier, product.productPrice, 
                 product.productQuantity, product.productInStock, product.productOnOrder,  product.productDiscontinued);
         }
 
         public bool productCheck(ProductObj product)
         {
-            ProductPage productPage = new ProductPage(driver);
+            MainPage mainPage = new MainPage(driver);
+            ProductsListPage productsListPage = mainPage.goToProductsListPage();
+
+            Assert.IsTrue(driver.FindElements(By.LinkText(product.productName)).Count != 0);
+
+            ProductPage productPage = productsListPage.goToProductPage(product.productName);
 
             return ((product.productName == productPage.getProductName())
             || (product.productCategory == productPage.getProductCategory())
@@ -42,6 +50,8 @@ namespace SeleniumWDTestProject
             || (product.productOnOrder == productPage.getProductOnOrder())
             || (product.productDiscontinued == productPage.getProductDiscontinuedState()));
         }
+
+
 
     }
 }

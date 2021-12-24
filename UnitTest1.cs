@@ -45,9 +45,7 @@ namespace SeleniumWDTestProject
         {
             ProductObj product = new ProductObj(Name, Category, Supplier, UnitPrice, Quantity, UnitsInStock, UnitsOnOrder, Discontinued);
 
-            MainPage mainPage = new MainPage(driver);
-            ProductsListPage productsListPage = mainPage.goToProductsListPage();
-            ProductBL productPage = productsListPage.createNewProduct();
+            ProductBL productPage = new ProductBL(driver); 
             productPage.createNewProduct(product);
 
             Assert.AreEqual(driver.Url, "http://localhost:5000/Product");
@@ -62,11 +60,7 @@ namespace SeleniumWDTestProject
         {
             ProductObj product = new ProductObj(Name, Category, Supplier, UnitPrice, Quantity, UnitsInStock, UnitsOnOrder, Discontinued);
 
-            MainPage mainPage = new MainPage(driver);
-            ProductsListPage productsListPage = mainPage.goToProductsListPage();
-
-            Assert.IsTrue(isElementPresent(By.LinkText(Name)));
-            ProductBL productPage = productsListPage.goToProductPage(Name);
+            ProductBL productPage = new ProductBL(driver);
 
             Assert.IsTrue(productPage.productCheck(product));
         }

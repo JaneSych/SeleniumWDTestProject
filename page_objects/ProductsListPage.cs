@@ -26,19 +26,19 @@ namespace SeleniumWDTestProject
         [FindsBy(How = How.LinkText, Using = "Create new")]
         private IWebElement createBtn;
 
-        public ProductBL createNewProduct()
+        public ProductPage createNewProduct()
         {
             createBtn.Click();
 
-            return new ProductBL(driver);
+            return new ProductPage(driver);
         }
 
-        public ProductBL goToProductPage(string name)
+        public ProductPage goToProductPage(string name)
         {
             IWebElement product = driver.FindElement(By.LinkText(name)); 
             product.Click();
 
-            return new ProductBL(driver);
+            return new ProductPage(driver);
         }
 
         public void deleteProduct(string name)
