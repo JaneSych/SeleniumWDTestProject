@@ -18,11 +18,11 @@ namespace SeleniumWDTestProject
     {
         public static IWebDriver driver;
 
-        public static bool isElementPresent(By locator)
-        {
-            Thread.Sleep(100);
-            return driver.FindElements(locator).Count != 0;
-        }
+        //public static bool isElementPresent(By locator)
+        //{
+        //    Thread.Sleep(100);
+        //    return driver.FindElements(locator).Count != 0;
+        //}
 
         [SetUp]
         public void Setup()
@@ -49,7 +49,7 @@ namespace SeleniumWDTestProject
             productPage.createNewProduct(product);
 
             Assert.AreEqual(driver.Url, "http://localhost:5000/Product");
-            Assert.IsTrue(isElementPresent(By.LinkText(Name)));
+            Assert.IsTrue(productPage.isElementPresent(By.LinkText(Name)));
         }
 
         [Test]
@@ -71,13 +71,10 @@ namespace SeleniumWDTestProject
         [TestCase("Fitnes Shok")]
         public void T3_DeleteProduct(string Name)
         {
-            MainPage mainPage = new MainPage(driver);
-            ProductsListPage productsListPage = mainPage.goToProductsListPage();
+            ProductBL productListPage = new ProductBL(driver);
+            productListPage.deleteProduct(Name);
 
-            Assert.IsTrue(isElementPresent(By.LinkText(Name)));
-            productsListPage.deleteProduct(Name);
- 
-            Assert.IsFalse(isElementPresent(By.LinkText(Name)));
+            Assert.IsFalse(productListPage.isElementPresent(By.LinkText(Name)));
         }
 
         [TearDown]

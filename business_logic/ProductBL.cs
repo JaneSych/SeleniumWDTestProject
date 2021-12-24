@@ -22,6 +22,12 @@ namespace SeleniumWDTestProject
             PageFactory.InitElements(driver, this);
         }
 
+        public bool isElementPresent(By locator)
+        {
+            Thread.Sleep(100);
+            return driver.FindElements(locator).Count != 0;
+        }
+
         public void createNewProduct(ProductObj product)
         {
             MainPage mainPage = new MainPage(driver);
@@ -37,7 +43,7 @@ namespace SeleniumWDTestProject
             MainPage mainPage = new MainPage(driver);
             ProductsListPage productsListPage = mainPage.goToProductsListPage();
 
-            Assert.IsTrue(driver.FindElements(By.LinkText(product.productName)).Count != 0);
+            Assert.IsTrue(isElementPresent(By.LinkText(product.productName)));
 
             ProductPage productPage = productsListPage.goToProductPage(product.productName);
 
@@ -51,7 +57,14 @@ namespace SeleniumWDTestProject
             || (product.productDiscontinued == productPage.getProductDiscontinuedState()));
         }
 
+        public void deleteProduct(string Name)
+        {
+            MainPage mainPage = new MainPage(driver);
+            ProductsListPage productsListPage = mainPage.goToProductsListPage();
 
+            Assert.IsTrue(isElementPresent(By.LinkText(Name)));
+            productsListPage.deleteProduct(Name);
+        }
 
     }
 }
